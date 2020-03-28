@@ -1,0 +1,28 @@
+/* .landing-page {
+	position: absolute !important;
+	z-index: -9 !important;
+	min-height: 250px !important;
+	display: block;
+} */
+
+.header {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+	text-shadow: 2.5px 1px #f8f4f4;
+	font-weight: bold;
+}
+
+.deskripsi {
+	text-shadow: 2.5px 1px #080808;
+	font-size: 14px;
+	color: #eaeaea;
+	font-weight: bold;
+}
+
+.card-img {
+	width: 250px;
+	height: 150px;
+}
+
+/* .form-control {
+	border-color: black;
+} */
