@@ -70,15 +70,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | The $query_builder variables lets you determine whether or not to load
 | the query builder class.
 */
-$active_group = 'default';
-$query_builder = TRUE;
+// $active_group = 'default';
+// $query_builder = TRUE;
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'ukom',
+	'hostname' => $url['host'],
+	'username' => $url['user'],
+	'password' => $url['pass'],
+	'database' => substr($url['path'], 1),
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

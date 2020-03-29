@@ -76,11 +76,11 @@ class Auth extends CI_Controller
 			$time = new DateTime();
 			$date = $time->getTimestamp();
 			$data = [
-				'nik' => $this->input->post('nik', 'true'),
-				'nama' => $this->input->post('nama', 'true'),
-				'username' => $this->input->post('username', 'true'),
-				'password' => password_hash($this->input->post('password', 'true'), PASSWORD_DEFAULT),
-				'telp' => $this->input->post('telp', 'true'),
+				'nik' => $this->input->post('nik', true),
+				'nama' => $this->input->post('nama', true),
+				'username' => $this->input->post('username', true),
+				'password' => password_hash($this->input->post('password', true), PASSWORD_DEFAULT),
+				'telp' => $this->input->post('telp', true),
 				'created_at' => date('Y-m-d H:i:s', $date)
 			];
 
