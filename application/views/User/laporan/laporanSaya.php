@@ -1,5 +1,9 @@
 <div class="container mb-5	">
-	<h3 class="text-center title mb-5">Laporan Saya</h3>
+	<h2 class="text-center mb-2 font-weight-bold">Data <?= $this->session->userdata('nama') ?></h2>
+	<p class="text-center">NIK : <?= $this->session->userdata('nik') ?></p>
+	<p class="text-center">username : <?= $this->session->userdata('username') ?></p>
+	<p class="text-center mb-5">Registrasi : <?= $this->session->userdata('created') ?></p>
+	<h3 class="text-center mb-2">Laporan <?= $this->session->userdata('nama') ?></h3>
 	<div class="col-sm">
 		<div class="row">
 			<div class="col-sm-6">

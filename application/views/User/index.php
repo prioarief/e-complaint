@@ -1,6 +1,7 @@
 <div class="container mb-5	">
 	<h3 class="text-center title mb-5">Laporan Pengaduan Masyarakat</h3>
 	<div class="col-sm">
+		<?= $this->session->flashdata('alert') ?>
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="card mb-3 shadow-lg p-3 mb-5">

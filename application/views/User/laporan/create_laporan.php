@@ -6,7 +6,7 @@
 				<div class="col-sm-12">
 					<div class="form-group">
 						<label for="">Nama</label>
-						<input type="text" class="form-control border-dark" id="" name="nama" value="Prio Arief Gunawan" readonly>
+						<input type="text" class="form-control border-dark" id="" name="nama" value="<?= $this->session->userdata('nama') ?>" readonly>
 						<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
 					</div>
 				</div>
@@ -14,7 +14,7 @@
 				<div class="col-sm-12">
 					<div class="form-group">
 						<label for="">NIK</label>
-						<input type="text" class="form-control border-dark" id="" name="nik" value="36700484848484949300" readonly>
+						<input type="text" class="form-control border-dark" id="" name="nik" value="<?= $this->session->userdata('nik') ?>" readonly>
 						<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
 					</div>
 				</div>
@@ -23,6 +23,14 @@
 					<div class="form-group">
 						<label for="">Tanggal Pengaduan</label>
 						<input type="text" class="form-control border-dark" id="" name="tanggal" value="<?= date('d M Y') ?>" readonly>
+						<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+					</div>
+				</div>
+
+				<div class="col-sm-12">
+					<div class="form-group">
+						<label for="">Judul</label>
+						<input type="text" class="form-control border-dark" id="" name="judul">
 						<!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
 					</div>
 				</div>

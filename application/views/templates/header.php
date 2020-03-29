@@ -34,14 +34,17 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarText">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="<?= base_url() ?>Laporan">Laporan Saya</a>
-				</li>
-			</ul>
-			<span class="navbar-text display-inline">
-				<a href="" class="nav-link">(Prio Arief Gunawan) Logout</a>
-			</span>
+			<?php if ($this->session->userdata('nik')) : ?>
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="<?= base_url() ?>Laporan">Laporan Saya</a>
+					</li>
+				</ul>
+				<span class="navbar-text display-inline">
+					<a href="<?= base_url() ?>Auth/logout" class="nav-link">(<?= $this->session->userdata('nama') ?>) Logout</a>
+				</span>
+			<?php endif; ?>
+
 		</div>
 	</nav>
 
@@ -50,10 +53,22 @@
 		<div class="container">
 			<br>
 			<h4 class="ml-5 header">Selamat Datang di <br> Website Pengaduan Laporan Masyarakat <br> Kota Tangerang</h4>
-			<!-- <span class="ml-5 deskripsi d-block">Silahkan Login Untuk Membuat Laporan</span> -->
-			<!-- <a href="<?= base_url() ?>Auth" class="btn btn-info ml-5 mt-2 mb-5">Login</a> -->
-			<a href="<?= base_url() ?>Laporan/create" class="btn btn-info ml-5 mt-2 mb-5 btn-sm">Buat Laporan</a>
-			<a href="<?= base_url() ?>Auth" class="btn btn-info ml-1 mt-2 mb-5 btn-sm">Laporan Saya</a>
+
+
+
+
+
+
+			<?php if (!$this->session->userdata('nik')) : ?>
+				<span class="ml-5 deskripsi d-block">Silahkan Login Untuk Membuat Laporan</span>
+				<a href="<?= base_url() ?>Auth" class="btn btn-info ml-5 mt-2 mb-5">Login</a>
+			<?php endif; ?>
+
+
+			<?php if ($this->session->userdata('nik')) : ?>
+				<a href="<?= base_url() ?>Laporan/create" class="btn btn-info ml-5 mt-2 mb-5 btn-sm">Buat Laporan</a>
+				<a href="<?= base_url() ?>Laporan" class="btn btn-info ml-1 mt-2 mb-5 btn-sm">Laporan Saya</a>
+			<?php endif; ?>
 		</div>
 	</div>
 
