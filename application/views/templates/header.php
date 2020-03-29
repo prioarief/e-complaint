@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>E-Complaint</title>
+	<link rel="shortcut icon" href="<?= base_url(); ?>assets/img/tangerang.png">
 	<link rel="stylesheet" href="<?= base_url() ?>assets/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?= base_url() ?>assets/myCss/style.css">
 	<script src="<?= base_url() ?>assets/bootstrap/js/jquery-3.4.1.slim.min.js"></script>
@@ -35,7 +36,7 @@
 		<div class="collapse navbar-collapse" id="navbarText">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
-					<a class="nav-link" href="#">Laporan Saya</a>
+					<a class="nav-link" href="<?= base_url() ?>Laporan">Laporan Saya</a>
 				</li>
 			</ul>
 			<span class="navbar-text display-inline">
