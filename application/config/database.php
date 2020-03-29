@@ -72,11 +72,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 $active_group = 'default';
 $query_builder = TRUE;
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => $url['host'],
+	'hostname' => 'us-cdbr-iron-east-01.cleardb.net',
 	'username' => 'b5d90758d164c3',
 	'password' => 'b24cfddb',
 	'database' => 'heroku_ab1528a717b55ae',

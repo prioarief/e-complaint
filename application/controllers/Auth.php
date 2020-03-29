@@ -23,7 +23,7 @@ class Auth extends CI_Controller
 		} else {
 			$username =  $this->input->post('username');
 			$password =  $this->input->post('password');
-			$query = $this->db->get_where('heroku_ab1528a717b55ae.masyarakat', ['username' => $username])->row_array();
+			$query = $this->db->get_where('masyarakat', ['username' => $username])->row_array();
 			if ($query) {
 				if (password_verify($password, $query['password'])) {
 					$dataUser = [
