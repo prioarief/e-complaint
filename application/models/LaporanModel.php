@@ -81,8 +81,6 @@ class LaporanModel extends CI_Model
 				$foto = $dataLaporan['foto'];
 				$path = './assets/img/lampiran/';
 
-
-
 				@unlink($path . $foto);
 
 				$this->db->where('id_pengaduan', $id);
