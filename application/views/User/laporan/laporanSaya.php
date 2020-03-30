@@ -5,6 +5,7 @@
 	<p class="text-center mb-5">Registrasi : <?= $this->session->userdata('created') ?></p>
 	<h3 class="text-center mb-2">Laporan <?= $this->session->userdata('nama') ?></h3>
 	<div class="col-sm">
+		<?= $this->session->flashdata('alert') ?>
 		<div class="row">
 			<?php foreach ($laporan as $report) : ?>
 				<div class="col-sm-12">
@@ -18,11 +19,17 @@
 							<div class="col-md-8">
 								<div class="card-body">
 									<h5 class="card-title text-center font-weight-bold">Judul Laporan : <?= $report['judul'] ?></h5>
-									<p class="card-text"><b>Isi Laporan</b> : <br><?= $report['isi_laporan'] ?></p>
-									<p class="card-text"><small class="text-muted">Status : <?= $report['status'] ?></small></p>
+									<?php if (strlen($report['isi_laporan']) <= 220) : ?>
+										<p class="card-text"><b>Isi Laporan</b> : <br><?= $report['isi_laporan'] ?></p>
+									<?php else : ?>
+										<p class="card-text"><b>Isi Laporan</b> : <br><?= substr($report['isi_laporan'], 0, 220) ?>
+											<a href="<?= base_url('Laporan/Detail/' . $report['id_pengaduan']) ?>" class="text-decoration-none">Baca Selengkapnya</a>
+										</p>
+									<?php endif; ?>
+									<p class=" card-text"><small class="text-muted">Status : <b><?= $report['status'] ?></b></small></p>
 									<a href="" class="btn btn-primary btn-sm">Lihat Tanggapan</a>
-									<a href="" class="btn btn-success btn-sm">Edit</a>
-									<a href="" class="btn btn-danger btn-sm">Hapus</a>
+									<a href="<?= base_url('Laporan/edit/' . $report['id_pengaduan']) ?>" class="btn btn-success btn-sm">Edit</a>
+									<a href="<?= base_url('Laporan/hapus/' . $report['id_pengaduan']) ?>" class="btn btn-danger btn-sm">Hapus</a>
 								</div>
 							</div>
 						</div>
