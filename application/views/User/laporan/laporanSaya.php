@@ -18,7 +18,7 @@
 							</div>
 							<div class="col-md-8">
 								<div class="card-body">
-									<h5 class="card-title text-center font-weight-bold">Judul Laporan : <?= $report['judul'] ?></h5>
+									<h5 class="card-title text-center font-weight-bold"><?= $report['judul'] ?></h5>
 									<?php if (strlen($report['isi_laporan']) <= 220) : ?>
 										<p class="card-text"><b>Isi Laporan</b> : <br><?= $report['isi_laporan'] ?></p>
 									<?php else : ?>

@@ -5,13 +5,13 @@ class Auth extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		if ($this->session->userdata('nik')) {
-			redirect('Home');
-		}
 	}
 
 	public function index()
 	{
+		if ($this->session->userdata('nik')) {
+			redirect('Home');
+		}
 		$this->form_validation->set_rules('username', 'Username', 'required', [
 			'required' => 'username Wajib Di isi'
 		]);
@@ -47,7 +47,9 @@ class Auth extends CI_Controller
 
 	public function register()
 	{
-
+		if ($this->session->userdata('nik')) {
+			redirect('Home');
+		}
 
 		$this->form_validation->set_rules('nama', 'Nama', 'required', [
 			'required' => 'Nama Wajib Di isi'

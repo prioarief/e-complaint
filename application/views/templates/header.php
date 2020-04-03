@@ -26,9 +26,9 @@
 		<a class="navbar-link text-white text-decoration-none" href="#">Login Admin</a>
 	</nav> -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="<?= base_url() ?>Laporan">
+		<a class="navbar-brand" href="<?= base_url() ?>Home">
 			<img src="<?= base_url() ?>assets/img/tangerang.png" width="30" height="30" class="d-inline-block align-top" alt="">
-			E-Complaint
+			E-Complaint Tangerang
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -37,11 +37,17 @@
 			<?php if ($this->session->userdata('nik')) : ?>
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active">
-						<a class="nav-link" href="<?= base_url() ?>Laporan">Laporan Saya</a>
+						<!-- <a class="nav-link" href="<?= base_url() ?>Laporan">Laporan Saya</a> -->
 					</li>
 				</ul>
 				<span class="navbar-text display-inline">
-					<a href="<?= base_url() ?>Auth/logout" class="nav-link">(<?= $this->session->userdata('nama') ?>) Logout</a>
+					<a href="<?= base_url() ?>Laporan" class="nav-link">Laporan Saya</a>
+				</span>
+				<span class="navbar-text display-inline">
+					<a href="<?= base_url() ?>Home/Profile" class="nav-link"><?= $this->session->userdata('nama') ?></a>
+				</span>
+				<span class="navbar-text display-inline">
+					<a href="<?= base_url() ?>Auth/logout" class="nav-link">Logout</a>
 				</span>
 			<?php endif; ?>
 

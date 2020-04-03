@@ -1,5 +1,6 @@
 <div class="container bg-light py-5">
 	<h3 class="text-center mb-5">Buat Pengaduan</h3>
+	<?= $this->session->flashdata('alert') ?>
 	<div class="col-sm-12">
 		<form method="post" enctype="multipart/form-data">
 			<div class="row">
@@ -30,7 +31,7 @@
 				<div class="col-sm-12">
 					<div class="form-group">
 						<label for="">Judul</label>
-						<input type="text" class="form-control border-dark" id="" name="judul" value="<?= set_value('judul') ?>">
+						<input type="text" class="form-control border-dark" id="" name="judul" value="<?= set_value('judul') ?>" autofocus>
 						<small id="" class="form-text text-danger"><?= form_error('judul') ?></small>
 					</div>
 				</div>

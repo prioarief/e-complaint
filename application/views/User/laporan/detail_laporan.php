@@ -13,20 +13,19 @@
 						</div>
 						<div class="col-md-8">
 							<div class="card-body">
-								<h5 class="card-title text-center font-weight-bold">Judul Laporan : <?= $detail['judul'] ?></h5>
+								<h5 class="card-title text-center font-weight-bold"><?= $detail['judul'] ?></h5>
 								<p class="card-text"><b>Isi Laporan</b> : <br><?= $detail['isi_laporan'] ?></p>
 								<p class=" card-text"><small class="text-muted">Status : <b><?= $detail['status'] ?></b></small></p>
 								<a href="" class="btn btn-primary btn-sm">Lihat Tanggapan</a>
-								<a href="<?= base_url('Laporan/edit/' . $detail['id_pengaduan']) ?>" class="btn btn-success btn-sm">Edit</a>
-								<a href="<?= base_url('Laporan/hapus/' . $detail['id_pengaduan']) ?>" class="btn btn-danger btn-sm">Hapus</a>
+								<?php if ($this->session->userdata('nik') && $this->session->userdata('nik') === $detail['nik']) : ?>
+									<a href="<?= base_url('Laporan/edit/' . $detail['id_pengaduan']) ?>" class="btn btn-success btn-sm">Edit</a>
+									<a href="<?= base_url('Laporan/hapus/' . $detail['id_pengaduan']) ?>" class="btn btn-danger btn-sm">Hapus</a>
+								<?php endif; ?>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
-
-
 
 
 

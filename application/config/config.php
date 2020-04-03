@@ -24,6 +24,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://localhost/E-Complaint/';
+// $config['base_url'] = 'http://192.168.43.81/E-Complaint';
 
 /*
 |--------------------------------------------------------------------------

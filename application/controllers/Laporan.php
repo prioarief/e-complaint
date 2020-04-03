@@ -6,11 +6,11 @@ class Laporan extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('LaporanModel');
-		login();
 	}
 
 	public function index()
 	{
+		login();
 		$data['laporan'] = $this->LaporanModel->GetAllLaporan();
 		$this->load->view('templates/header');
 		$this->load->view('User/laporan/laporanSaya', $data);
@@ -19,6 +19,7 @@ class Laporan extends CI_Controller
 
 	public function create()
 	{
+		login();
 		$this->form_validation->set_rules('judul', 'Judul', 'required');
 		$this->form_validation->set_rules('isi', 'Isi Laporan', 'required');
 		// $this->form_validation->set_rules('foto', 'Lampiran/foto', 'required');
@@ -28,14 +29,28 @@ class Laporan extends CI_Controller
 			$this->load->view('User/laporan/create_laporan');
 			$this->load->view('templates/footer');
 		} else {
-			$this->LaporanModel->CreateLaporan();
-			$this->session->set_flashdata('alert', '<div class="alert alert-success text-center">Laporan Pengaduan berhasil di buat</div>');
-			redirect('Laporan', 'refresh');
+			$config['upload_path'] = './assets/img/lampiran/';
+			$config['allowed_types'] = 'png|jpg|jpeg';
+			$config['max_size'] = '3072';
+			$config['encrypt_name'] = true;
+
+			$this->load->library('upload', $config);
+
+			if (!$this->upload->do_upload('foto')) {
+				$this->session->set_flashdata('alert', '<div class="alert alert-danger text-center">Laporan Pengaduan gagal di buat</div>');
+				redirect('Laporan/create', 'refresh');
+				return false;
+			} else {
+				$this->LaporanModel->CreateLaporan();
+				$this->session->set_flashdata('alert', '<div class="alert alert-success text-center">Laporan Pengaduan berhasil di buat</div>');
+				redirect('Laporan', 'refresh');
+			}
 		}
 	}
 
 	public function edit($id)
 	{
+		login();
 		$this->form_validation->set_rules('judul', 'Judul', 'required');
 		$this->form_validation->set_rules('isi', 'Isi Laporan', 'required');
 
@@ -62,6 +77,7 @@ class Laporan extends CI_Controller
 
 	public function hapus($id)
 	{
+		login();
 		$laporan = $this->LaporanModel->DetailLaporan($id);
 		$foto = $laporan['foto'];
 		$path = './assets/img/lampiran/';

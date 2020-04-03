@@ -14,29 +14,20 @@ class LaporanModel extends CI_Model
 
 	public function CreateLaporan()
 	{
-		$config['upload_path'] = './assets/img/lampiran/';
-		$config['allowed_types'] = 'png|jpg|jpeg';
-		$config['max_size'] = '3072';
-		$config['encrypt_name'] = true;
+		$lampiran = array('upload_data' => $this->upload->data());
 
-		$this->load->library('upload', $config);
 
-		if (!$this->upload->do_upload('foto')) {
-			$error = array('error' => $this->upload->display_errors());
-			var_dump($error);
-		} else {
-			$lampiran = array('upload_data' => $this->upload->data());
-
+		for ($i = 1; $i < 10; $i++) {
 			$data = [
-				'judul' => $this->input->post('judul', true),
+				'judul' => htmlspecialchars($this->input->post('judul', true) . $i),
 				'tgl_pengaduan' => date('Y-m-d', time()),
 				'nik' => $this->session->userdata('nik'),
-				'isi_laporan' => $this->input->post('isi'),
+				'isi_laporan' => htmlspecialchars($this->input->post('isi', true)),
 				'foto' => $lampiran['upload_data']['file_name'],
 				'status' => 'menunggu verifikasi'
 			];
-
 			$this->db->insert('pengaduan', $data);
+			// var_dump($data);
 		}
 	}
 

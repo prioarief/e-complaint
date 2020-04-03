@@ -3,91 +3,54 @@
 	<div class="col-sm">
 		<?= $this->session->flashdata('alert') ?>
 		<div class="row">
-			<div class="col-sm-6">
-				<div class="card mb-3 shadow-lg p-3 mb-5">
-					<div class=" row no-gutters">
-						<div class="col-md-7">
-							<img src="<?= base_url() ?>assets/img/jalananrusak1.jpg" class="card-img" alt="...">
-						</div>
-						<div class="col-md-5">
-							<div class="card-body">
-								<h5 class="card-title text-center font-weight-bold">Jalanan Rusak</h5>
-								<p class="card-text">Jalan rusak di jalan M. Yamin. Mohon segera di perbaiki</p>
-								<p class="card-text"><small class="text-muted">Pelapor : Prio Arief Gunawan</small></p>
-								<a href="" class="btn btn-primary btn-sm">Lihat Tanggapan</a>
+			<?php foreach ($data as $report) : ?>
+				<div class="col-sm-12">
+					<div class="card mb-3 shadow-lg p-3 mb-5">
+						<div class=" row no-gutters">
+							<div class="col-md-4">
+								<a href="<?= base_url('assets/img/lampiran/' . $report['foto']) ?>">
+									<img src="<?= base_url('assets/img/lampiran/' . $report['foto']) ?>" class="card-img mt-5 ml-3">
+								</a>
+							</div>
+							<div class="col-md-8">
+								<div class="card-body">
+									<h5 class="card-title text-center font-weight-bold"><?= $report['judul'] ?></h5>
+									<?php if (strlen($report['isi_laporan']) <= 220) : ?>
+										<p class="card-text"><b>Isi Laporan</b> : <br><?= $report['isi_laporan'] ?></p>
+									<?php else : ?>
+										<p class="card-text"><b>Isi Laporan</b> : <br><?= substr($report['isi_laporan'], 0, 220) ?>
+											<a href="<?= base_url('Laporan/Detail/' . $report['id_pengaduan']) ?>" class="badge badge text-decoration-none">Baca Selengkapnya</a>
+										</p>
+									<?php endif; ?>
+									<p class=" card-text"><small class="text-muted">Status : <b><?= $report['status'] ?></b></small></p>
+									<p class=" card-text"><small class="text-muted">Pelapor : <b><?= $report['nama'] ?></b></small></p>
+									<a href="" class="btn btn-primary btn-sm">Lihat Tanggapan</a>
+
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-sm-6">
-				<div class="card mb-3 shadow-lg p-3 mb-5">
-					<div class=" row no-gutters">
-						<div class="col-md-7">
-							<img src="<?= base_url() ?>assets/img/jalananrusak2.jpg" class="card-img" alt="...">
-						</div>
-						<div class="col-md-5">
-							<div class="card-body">
-								<h5 class="card-title text-center font-weight-bold">Jalanan Rusak</h5>
-								<p class="card-text">Jalan rusak di jalan MH Thamrin no 1. Mohon segera di perbaiki</p>
-								<p class="card-text"><small class="text-muted">Pelapor : Prio Arief Gunawan</small></p>
-								<a href="" class="btn btn-primary btn-sm">Lihat Tanggapan</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6">
-				<div class="card mb-3 shadow-lg p-3 mb-5">
-					<div class=" row no-gutters">
-						<div class="col-md-7">
-							<img src="<?= base_url() ?>assets/img/tawuran1.jpg" class="card-img" alt="...">
-						</div>
-						<div class="col-md-5">
-							<div class="card-body">
-								<h5 class="card-title text-center font-weight-bold">Tawuran Pelajar</h5>
-								<p class="card-text">Tawuuran pelajar membuat warga resah</p>
-								<p class="card-text"><small class="text-muted">Pelapor : Prio Arief Gunawan</small></p>
-								<a href="" class="btn btn-primary btn-sm">Lihat Tanggapan</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6">
-				<div class="card mb-3 shadow-lg p-3 mb-5">
-					<div class=" row no-gutters">
-						<div class="col-md-7">
-							<img src="<?= base_url() ?>assets/img/vandalism1.jpg" class="card-img" alt="...">
-						</div>
-						<div class="col-md-5">
-							<div class="card-body">
-								<h5 class="card-title text-center font-weight-bold">Vandalisme</h5>
-								<p class="card-text">Vandalisme membuat tembok menjadi kotor</p>
-								<p class="card-text"><small class="text-muted">Pelapor : Prio Arief Gunawan</small></p>
-								<a href="" class="btn btn-primary btn-sm">Lihat Tanggapan</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<?php endforeach; ?>
+
 
 
 
 
 		</div>
 	</div>
-	<nav aria-label="Page navigation example">
-		<ul class="pagination justify-content-center">
-			<li class="page-item disabled">
-				<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-			</li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item">
-				<a class="page-link" href="#">Next</a>
-			</li>
-		</ul>
-	</nav>
+	<?php echo $this->pagination->create_links(); ?>
+
+	<!-- <ul class="pagination justify-content-center">
+		<li class="page-item">
+			<a class="page-link" href="#" tabindex="-1">Previous</a>
+		</li>
+		<li class="page-item"><a class="page-link" href="#">1</a></li>
+		<li class="page-item active"><a class="page-link" href="#">2</a></li>
+		<li class="page-item"><a class="page-link" href="#">3</a></li>
+		<li class="page-item">
+			<a class="page-link" href="#">Next</a>
+		</li>
+	</ul> -->
+
 </div>
