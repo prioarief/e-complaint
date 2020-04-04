@@ -24,7 +24,7 @@
 									<?php endif; ?>
 									<p class=" card-text"><small class="text-muted">Status : <b><?= $report['status'] ?></b></small></p>
 									<p class=" card-text"><small class="text-muted">Pelapor : <b><?= $report['nama'] ?></b></small></p>
-									<a href="" class="btn btn-primary btn-sm">Lihat Tanggapan</a>
+									<a href="" class="badge badge-primary badge-sm">Lihat Tanggapan</a>
 
 								</div>
 							</div>
@@ -52,5 +52,7 @@
 			<a class="page-link" href="#">Next</a>
 		</li>
 	</ul> -->
+
+	<!-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15866.30757025075!2d106.6377526!3d-6.1873334!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0xbbf35137362e584d!2sSekolah Menengah Kejuruan Negeri 4 Tangerang!5e0!3m2!1sid!2sid!4v1585557646148!5m2!1sid!2sid" frameborder="0"></iframe> -->
 
 </div>

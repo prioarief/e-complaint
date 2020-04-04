@@ -27,9 +27,9 @@
 										</p>
 									<?php endif; ?>
 									<p class=" card-text"><small class="text-muted">Status : <b><?= $report['status'] ?></b></small></p>
-									<a href="" class="btn btn-primary btn-sm">Lihat Tanggapan</a>
-									<a href="<?= base_url('Laporan/edit/' . $report['id_pengaduan']) ?>" class="btn btn-success btn-sm">Edit</a>
-									<a href="<?= base_url('Laporan/hapus/' . $report['id_pengaduan']) ?>" class="btn btn-danger btn-sm">Hapus</a>
+									<a href="" class="badge badge-primary badge-sm">Lihat Tanggapan</a>
+									<a href="<?= base_url('Laporan/edit/' . $report['id_pengaduan']) ?>" class="badge badge-success badge-sm">Edit</a>
+									<a href="<?= base_url('Laporan/hapus/' . $report['id_pengaduan']) ?>" class="badge badge-danger badge-sm">Hapus</a>
 								</div>
 							</div>
 						</div>
@@ -43,17 +43,6 @@
 
 		</div>
 	</div>
-	<nav aria-label="Page navigation example">
-		<ul class="pagination justify-content-center">
-			<li class="page-item disabled">
-				<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-			</li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item">
-				<a class="page-link" href="#">Next</a>
-			</li>
-		</ul>
-	</nav>
+	<?= $this->pagination->create_links() ?>
+
 </div>

@@ -9,7 +9,7 @@ class Auth extends CI_Controller
 
 	public function index()
 	{
-		if ($this->session->userdata('nik')) {
+		if ($this->session->userdata('nik') || $this->session->userdata('id_petugas')) {
 			redirect('Home');
 		}
 		$this->form_validation->set_rules('username', 'Username', 'required', [
@@ -19,8 +19,12 @@ class Auth extends CI_Controller
 			'required' => 'Password Wajib Di isi'
 		]);
 
+		$data = [
+			'title' => 'Login Masyarakat',
+		];
+
 		if ($this->form_validation->run() == FALSE) {
-			$this->load->view('templates/header');
+			$this->load->view('templates/header', $data);
 			$this->load->view('User/auth/login');
 			$this->load->view('templates/footer');
 		} else {
@@ -47,7 +51,7 @@ class Auth extends CI_Controller
 
 	public function register()
 	{
-		if ($this->session->userdata('nik')) {
+		if ($this->session->userdata('nik') || $this->session->userdata('id_petugas')) {
 			redirect('Home');
 		}
 
@@ -64,16 +68,21 @@ class Auth extends CI_Controller
 			'alpha_dash' => 'Username tidak memakai spasi',
 			'required' => 'username Wajib Di isi'
 		]);
-		$this->form_validation->set_rules('password', 'Password', 'required|alpha_dash', [
+		$this->form_validation->set_rules('password', 'Password', 'required|alpha_dash|min_length[8]', [
 			'required' => 'Password Wajib Di isi',
-			'alpha_dash' => 'Username tidak memakai spasi'
+			'alpha_dash' => 'Password tidak memakai spasi',
+			'min_length' => 'Password minimal 8 huruf'
 		]);
 		$this->form_validation->set_rules('telp', 'Telp', 'required|numeric', [
 			'numeric' => 'Telp hanya boleh nomor'
 		]);
 
+		$data = [
+			'title' => 'Register',
+		];
+
 		if ($this->form_validation->run() == FALSE) {
-			$this->load->view('templates/header');
+			$this->load->view('templates/header', $data);
 			$this->load->view('User/auth/register');
 			$this->load->view('templates/footer');
 		} else {

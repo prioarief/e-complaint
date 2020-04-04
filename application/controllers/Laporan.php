@@ -6,13 +6,57 @@ class Laporan extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('LaporanModel');
+		$this->load->library('pagination');
+		hakAkses();
 	}
 
 	public function index()
 	{
 		login();
-		$data['laporan'] = $this->LaporanModel->GetAllLaporan();
-		$this->load->view('templates/header');
+
+
+		$config['base_url'] = 'http://localhost/E-Complaint/Laporan/index';
+		$config['per_page'] = 4;
+		$config['total_rows'] = $this->LaporanModel->CountMyLaporan();
+
+		$start = $this->uri->segment(3);
+
+		//style
+		$config['full_tag_open'] = '<ul class="pagination justify-content-center">';
+		$config['full_tag_close'] = '</ul>';
+
+
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li class="page-item">';
+		$config['first_tag_close'] = '</li>';
+
+		$config['last_link'] = 'last';
+		$config['last_tag_open'] = '<li class="page-item">';
+		$config['last_tag_close'] = '</li>';
+
+		$config['next_link'] = '&raquo';
+		$config['next_tag_open'] = '<li class="page-item">';
+		$config['next_tag_close'] = '</li>';
+
+		$config['prev_link'] = '&laquo';
+		$config['prev_tag_open'] = '<li class="page-item">';
+		$config['prev_tag_close'] = '</li>';
+
+		$config['cur_tag_open'] = '<li class="page-item active"><a class="page-link">';
+		$config['cur_tag_close'] = '</a></li>';
+
+		$config['num_tag_open'] = '<li class="page-item">';
+		$config['num_tag_close'] = '</li>';
+
+		$config['attributes'] = array('class' => 'page-link');
+
+		$this->pagination->initialize($config);
+
+		$data = [
+			'laporan' => $this->LaporanModel->GetMyLaporan($config['per_page'], $start),
+			'title' => 'Laporan Saya'
+		];
+		$this->load->view('templates/header', $data);
 		$this->load->view('User/laporan/laporanSaya', $data);
 		$this->load->view('templates/footer');
 	}
@@ -24,8 +68,12 @@ class Laporan extends CI_Controller
 		$this->form_validation->set_rules('isi', 'Isi Laporan', 'required');
 		// $this->form_validation->set_rules('foto', 'Lampiran/foto', 'required');
 
+		$data = [
+			'title' => 'Buat Laporan'
+		];
+
 		if ($this->form_validation->run() == FALSE) {
-			$this->load->view('templates/header');
+			$this->load->view('templates/header', $data);
 			$this->load->view('User/laporan/create_laporan');
 			$this->load->view('templates/footer');
 		} else {
@@ -48,11 +96,22 @@ class Laporan extends CI_Controller
 		}
 	}
 
-	public function edit($id)
+	public function edit($id = null)
 	{
+		if (is_null($id)) {
+			redirect('Home');
+		}
+
+
 		login();
+
+
 		$this->form_validation->set_rules('judul', 'Judul', 'required');
 		$this->form_validation->set_rules('isi', 'Isi Laporan', 'required');
+
+		$data = [
+			'title' => 'Edit Laporan'
+		];
 
 		if ($this->form_validation->run() == FALSE) {
 
@@ -69,14 +128,23 @@ class Laporan extends CI_Controller
 
 	public function detail($id)
 	{
-		$data['detail'] = $this->LaporanModel->DetailLaporan($id);
-		$this->load->view('templates/header');
+
+		$data = [
+			'title' => 'Detail Laporan',
+			'detail' => $this->LaporanModel->DetailLaporan($id)
+		];
+
+		$this->load->view('templates/header', $data);
 		$this->load->view('User/laporan/detail_laporan', $data);
 		$this->load->view('templates/footer');
 	}
 
-	public function hapus($id)
+	public function hapus($id = null)
 	{
+		if (is_null($id)) {
+			redirect('Home');
+		}
+
 		login();
 		$laporan = $this->LaporanModel->DetailLaporan($id);
 		$foto = $laporan['foto'];

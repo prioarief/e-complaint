@@ -5,19 +5,24 @@ class Home extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('HomeModel');
+
+		$this->load->model('LaporanModel');
 		$this->load->library('pagination');
+		hakAkses();
 	}
 
 	public function index()
 	{
 
 		$config['base_url'] = 'http://localhost/E-Complaint/Home/index';
-		$config['total_rows'] = $this->HomeModel->CountLaporan();
+		$config['total_rows'] = $this->LaporanModel->CountLaporanProses();
 		$config['per_page'] = 4;
 
 		$start = $this->uri->segment(3);
-		$data['data'] = $this->HomeModel->Laporan($config['per_page'], $start);
+		$data = [
+			'data' => $this->LaporanModel->GetSpesificLaporan($config['per_page'], $start),
+			'title' => 'Laporan Masyarakat',
+		];
 
 		//style
 		$config['full_tag_open'] = '<ul class="pagination justify-content-center">';
@@ -54,7 +59,8 @@ class Home extends CI_Controller
 		$this->pagination->initialize($config);
 
 
-		$this->load->view('templates/header');
+
+		$this->load->view('templates/header', $data);
 		$this->load->view('User/index', $data);
 		$this->load->view('templates/footer');
 	}

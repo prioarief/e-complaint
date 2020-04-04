@@ -16,65 +16,40 @@
 
 <body>
 
-	<!-- Image and text -->
-	<!-- <nav class="navbar navbar-dark bg-dark mb-0">
-		<a class="navbar-brand" href="<?= base_url() ?>Laporan">
-			<img src="<?= base_url() ?>assets/img/tangerang.png" width="30" height="30" class="d-inline-block align-top" alt="">
-			E-Complaint
-		</a>
-
-		<a class="navbar-link text-white text-decoration-none" href="#">Login Admin</a>
-	</nav> -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<a class="navbar-brand" href="<?= base_url() ?>Home">
 			<img src="<?= base_url() ?>assets/img/tangerang.png" width="30" height="30" class="d-inline-block align-top" alt="">
-			E-Complaint Tangerang
+			E-Complaint Admin
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarText">
-			<?php if ($this->session->userdata('nik')) : ?>
+			<?php if ($this->session->userdata('id_petugas')) : ?>
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active">
 						<!-- <a class="nav-link" href="<?= base_url() ?>Laporan">Laporan Saya</a> -->
 					</li>
 				</ul>
 				<span class="navbar-text display-inline">
-					<a href="<?= base_url() ?>Laporan" class="nav-link">Laporan Saya</a>
+					<a href="<?= base_url() ?>Laporan" class="nav-link">Laporan Pengaduan Masyarakat</a>
 				</span>
 				<span class="navbar-text display-inline">
-					<a href="<?= base_url() ?>Home/Profile" class="nav-link"><?= $this->session->userdata('nama') ?></a>
-				</span>
-				<span class="navbar-text display-inline">
-					<a href="<?= base_url() ?>Auth/logout" class="nav-link">Logout</a>
+					<a href="<?= base_url() ?>Admin/logout" class="nav-link">Logout</a>
 				</span>
 			<?php endif; ?>
 
 		</div>
 	</nav>
 
-	<div class="jumbotron jumbotron-fluid" style="background-image: url('<?= base_url() ?>assets/img/puspem.jpg'); background-size : 100% 100%">
+	<div class="jumbotron jumbotron-fluid" style="background-image: url('<?= base_url() ?>assets/img/puspem.jpg'); background-size : 100% 100%; height:40vh">
 		<!-- <img class="img img-fluid landing-page" src="<?= base_url() ?>assets/img/puspem.jpg" alt=""> -->
 		<div class="container">
-			<br>
-			<h4 class="ml-5 header">Selamat Datang di <br> Website Pengaduan Laporan Masyarakat <br> Kota Tangerang</h4>
-
-
-
-
-
-
-			<?php if (!$this->session->userdata('nik')) : ?>
-				<span class="ml-5 deskripsi d-block">Silahkan Login Untuk Membuat Laporan</span>
-				<a href="<?= base_url() ?>Auth" class="btn btn-info ml-5 mt-2 mb-5">Login</a>
+			<?php if ($this->session->userdata('id_petugas')) : ?>
+				<h3 class="text-center header mt-5">Selamat Datang <?= $this->session->userdata('level') ?></h3>
+				<h4 class="text-center header"><?= $this->session->userdata('nama_petugas') ?></h4>
 			<?php endif; ?>
 
-
-			<?php if ($this->session->userdata('nik')) : ?>
-				<a href="<?= base_url() ?>Laporan/create" class="btn btn-info ml-5 mt-2 mb-5 btn-sm">Buat Laporan</a>
-				<a href="<?= base_url() ?>Laporan" class="btn btn-info ml-1 mt-2 mb-5 btn-sm">Laporan Saya</a>
-			<?php endif; ?>
 		</div>
 	</div>
 
