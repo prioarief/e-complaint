@@ -85,12 +85,21 @@ class Laporan extends CI_Controller
 			$this->load->library('upload', $config);
 
 			if (!$this->upload->do_upload('foto')) {
-				$this->session->set_flashdata('alert', '<div class="alert alert-danger text-center">Laporan Pengaduan gagal di buat</div>');
+				$this->session->set_flashdata('alert', 'Laporan Pengaduan gagal di buat');
 				redirect('Laporan/create', 'refresh');
 				return false;
 			} else {
-				$this->LaporanModel->CreateLaporan();
-				$this->session->set_flashdata('alert', '<div class="alert alert-success text-center">Laporan Pengaduan berhasil di buat</div>');
+				$lampiran = array('upload_data' => $this->upload->data());
+				$data = [
+					'judul' => htmlspecialchars($this->input->post('judul', true)),
+					'tgl_pengaduan' => date('Y-m-d', time()),
+					'nik' => $this->session->userdata('nik'),
+					'isi_laporan' => htmlspecialchars($this->input->post('isi', true)),
+					'foto' => $lampiran['upload_data']['file_name'],
+					'status' => 'menunggu verifikasi'
+				];
+				$this->LaporanModel->CreateLaporan($data);
+				$this->session->set_flashdata('alert', 'Laporan Pengaduan berhasil di buat');
 				redirect('Laporan', 'refresh');
 			}
 		}
@@ -116,12 +125,52 @@ class Laporan extends CI_Controller
 		if ($this->form_validation->run() == FALSE) {
 
 			$data['detail'] = $this->LaporanModel->DetailLaporan($id);
-			$this->load->view('templates/header');
+			$this->load->view('templates/header', $data);
 			$this->load->view('User/laporan/edit_laporan', $data);
 			$this->load->view('templates/footer');
 		} else {
-			$this->LaporanModel->EditLaporan($id);
-			$this->session->set_flashdata('alert', '<div class="alert alert-success text-center">Laporan Pengaduan berhasil di edit</div>');
+			if (empty($_FILES['foto']['name'])) {
+				$data = [
+					'judul' => $this->input->post('judul', true),
+					'tgl_pengaduan' => date('Y-m-d', time()),
+					'nik' => $this->session->userdata('nik'),
+					'isi_laporan' => $this->input->post('isi')
+				];
+
+				$this->LaporanModel->EditLaporan($id, $data);
+			} else {
+				$config['upload_path'] = './assets/img/lampiran/';
+				$config['allowed_types'] = 'png|jpg|jpeg';
+				$config['max_size'] = '3072';
+				$config['encrypt_name'] = true;
+
+				$this->load->library('upload', $config);
+
+				if (!$this->upload->do_upload('foto')) {
+					$error = array('error' => $this->upload->display_errors());
+					var_dump($error);
+				} else {
+					$lampiran = array('upload_data' => $this->upload->data());
+
+					$data = [
+						'judul' => $this->input->post('judul', true),
+						'tgl_pengaduan' => date('Y-m-d', time()),
+						'nik' => $this->session->userdata('nik'),
+						'isi_laporan' => $this->input->post('isi'),
+						'foto' => $lampiran['upload_data']['file_name'],
+						'status' => 'menunggu verifikasi'
+					];
+
+					$dataLaporan = $this->LaporanModel->DetailLaporan($id);
+					$foto = $dataLaporan['foto'];
+					$path = './assets/img/lampiran/';
+
+					@unlink($path . $foto);
+
+					$this->LaporanModel->EditLaporan($id, $data);
+				}
+			}
+			$this->session->set_flashdata('alert', 'Laporan Pengaduan berhasil di edit');
 			redirect('Laporan', 'refresh');
 		}
 	}
@@ -153,7 +202,7 @@ class Laporan extends CI_Controller
 		$this->LaporanModel->DeleteLaporan($id);
 		@unlink($path . $foto);
 
-		$this->session->set_flashdata('alert', '<div class="alert alert-success text-center">Laporan Pengaduan berhasil di hapus</div>');
+		$this->session->set_flashdata('alert', 'Laporan Pengaduan berhasil di hapus');
 		redirect('Laporan', 'refresh');
 	}
 }

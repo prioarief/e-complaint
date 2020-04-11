@@ -16,7 +16,7 @@ class Home extends CI_Controller
 
 		$config['base_url'] = 'http://localhost/E-Complaint/Home/index';
 		$config['total_rows'] = $this->LaporanModel->CountLaporanProses();
-		$config['per_page'] = 4;
+		$config['per_page'] = 6;
 
 		$start = $this->uri->segment(3);
 		$data = [
@@ -67,8 +67,11 @@ class Home extends CI_Controller
 
 	public function profile()
 	{
+		$data = [
+			'title' => 'My Profil'
+		];
 
-		$this->load->view('templates/header');
+		$this->load->view('templates/header', $data);
 		$this->load->view('User/profil/index');
 		$this->load->view('templates/footer');
 	}

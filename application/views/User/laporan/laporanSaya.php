@@ -1,11 +1,9 @@
 <div class="container mb-5	">
-	<h2 class="text-center mb-2 font-weight-bold">Data <?= $this->session->userdata('nama') ?></h2>
-	<p class="text-center">NIK : <?= $this->session->userdata('nik') ?></p>
-	<p class="text-center">username : <?= $this->session->userdata('username') ?></p>
-	<p class="text-center mb-5">Registrasi : <?= $this->session->userdata('created') ?></p>
 	<h3 class="text-center mb-2">Laporan <?= $this->session->userdata('nama') ?></h3>
 	<div class="col-sm">
-		<?= $this->session->flashdata('alert') ?>
+		<?php if ($this->session->flashdata('alert')) : ?>
+			<div class="alert alert-success"><?= $this->session->flashdata('alert') ?></div>
+		<?php endif; ?>
 		<div class="row">
 			<?php foreach ($laporan as $report) : ?>
 				<div class="col-sm-12">
@@ -27,9 +25,13 @@
 										</p>
 									<?php endif; ?>
 									<p class=" card-text"><small class="text-muted">Status : <b><?= $report['status'] ?></b></small></p>
-									<a href="" class="badge badge-primary badge-sm">Lihat Tanggapan</a>
-									<a href="<?= base_url('Laporan/edit/' . $report['id_pengaduan']) ?>" class="badge badge-success badge-sm">Edit</a>
-									<a href="<?= base_url('Laporan/hapus/' . $report['id_pengaduan']) ?>" class="badge badge-danger badge-sm">Hapus</a>
+									<?php if ($report['status'] == 'menunggu verifikasi') : ?>
+										<a href="<?= base_url('Laporan/edit/' . $report['id_pengaduan']) ?>" class="badge badge-success badge-sm">Edit</a>
+										<a href="<?= base_url('Laporan/hapus/' . $report['id_pengaduan']) ?>" class="badge badge-danger badge-sm">Hapus</a>
+									<?php elseif ($report['status'] == 'selesai') : ?>
+										<a href="" class="badge badge-primary badge-sm">Lihat Tanggapan</a>
+									<?php endif; ?>
+
 								</div>
 							</div>
 						</div>

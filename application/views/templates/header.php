@@ -78,6 +78,20 @@
 		</div>
 	</div>
 
+	<!-- <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+				<img src="<?= base_url() ?>assets/img/puspem.jpg" class="d-block w-100" alt="<?= base_url() ?>assets/img/puspem.jpg">
+			</div>
+			<div class="carousel-item">
+				<img src="<?= base_url() ?>assets/img/puspem.jpg" class="d-block w-100" alt="<?= base_url() ?>assets/img/puspem2.jpg">
+			</div>
+			<div class="carousel-item">
+				<img src="<?= base_url() ?>assets/img/puspem.jpg" class="d-block w-100" alt="<?= base_url() ?>assets/img/puspem.jpg">
+			</div>
+		</div>
+	</div> -->
+
 
 
 </body>

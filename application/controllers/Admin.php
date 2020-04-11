@@ -7,6 +7,7 @@ class Admin extends CI_Controller
 		parent::__construct();
 		date_default_timezone_set("Asia/Bangkok");
 		$this->load->model('LaporanModel', 'laporan');
+		$this->load->model('TanggapanModel', 'tanggapan');
 		$this->load->library('pagination');
 	}
 
@@ -18,11 +19,12 @@ class Admin extends CI_Controller
 		$config['total_rows'] = $this->laporan->CountLaporanProses();
 		$config['per_page'] = 10;
 
+		$where = $this->input->post('order_by', true);
 
 		$data = [
 			'title' => 'Admin',
 			'start' => $this->uri->segment(3),
-			'data' => $this->laporan->getAll($config['per_page'], $this->uri->segment(3)),
+			'data' => $this->laporan->getAll($where, $config['per_page'], $this->uri->segment(3)),
 		];
 
 		//style
@@ -102,14 +104,14 @@ class Admin extends CI_Controller
 					$this->session->set_userdata($dataAdmin);
 
 
-					$this->session->set_flashdata('alert', '<div class="alert alert-success">Login berhasil, Welcome</div>');
+					$this->session->set_flashdata('alert', 'Login berhasil, Welcome');
 					redirect('Admin');
 				} else {
-					$this->session->set_flashdata('alert', '<div class="alert alert-danger">Password salah</div>');
+					$this->session->set_flashdata('alert', 'Password salah');
 					redirect('Admin/Auth');
 				}
 			} else {
-				$this->session->set_flashdata('alert', '<div class="alert alert-danger">username tidak terdaftar</div>');
+				$this->session->set_flashdata('alert', 'username tidak terdaftar');
 				redirect('Admin/Auth');
 			}
 		}
@@ -147,5 +149,74 @@ class Admin extends CI_Controller
 		$this->session->unset_userdata('time');
 
 		redirect('Admin/auth');
+	}
+
+	public function DetailLaporan($id = null)
+	{
+		login_admin();
+		if (!$id) {
+			redirect('Admin');
+		}
+
+		$data = [
+			'title' => 'Detail Laporan',
+			'detail' => $this->laporan->DetailLaporan($id)
+		];
+
+		$this->load->view('admin/templates/header', $data);
+		$this->load->view('admin/laporan/detail_laporan', $data);
+		$this->load->view('admin/templates/footer');
+	}
+
+	public function verifikasi($id = null)
+	{
+		login_admin();
+		if (is_null($id)) {
+			redirect('Admin');
+		}
+
+		$request = $this->laporan->DetailLaporan($id);
+		if (is_null($request)) {
+			redirect('Admin');
+		} else {
+			$data = [
+				'status' => 'proses'
+			];
+
+			$this->laporan->Verifikasi($id, $data);
+		}
+		$this->session->set_flashdata('alert-success', 'Laporan Berhasil Di Verifikasi');
+		redirect('Admin');
+	}
+
+	public function Tanggapan($id)
+	{
+		login_admin();
+		if (is_null($id)) {
+			redirect('Admin');
+		}
+
+
+
+
+		$data = [
+			'id_pengaduan' => $id,
+			'tgl_tanggapan' => date('Y-m-d', time()),
+			'tanggapan' => $this->input->post('isi', true) . '.Terimakasih atas laporannya',
+			'id_petugas' => $this->session->userdata('id_petugas')
+
+		];
+
+		$response = $this->tanggapan->CreateTanggapan($data);
+		if ($response == true) {
+			$data =
+				[
+					'status' => 'selesai'
+				];
+			$this->laporan->EditLaporan($id, $data);
+		}
+
+		$this->session->set_flashdata('alert-success', 'Laporan Berhasil di Tanggapi');
+		redirect('Admin');
 	}
 }
