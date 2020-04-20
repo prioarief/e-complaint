@@ -17,7 +17,7 @@
 								<p class="card-text"><b>Isi Laporan</b> : <br><?= $detail['isi_laporan'] ?></p>
 								<p class=" card-text"><small class="text-muted">Status : <b><?= $detail['status'] ?></b></small></p>
 								<a href="" class="btn btn-primary btn-sm">Lihat Tanggapan</a>
-								<?php if ($this->session->userdata('nik') && $this->session->userdata('nik') === $detail['nik']) : ?>
+								<?php if ($this->session->userdata('nik') && $this->session->userdata('nik') === $detail['nik'] && $detail['status'] == 'menunggu verifikasi') : ?>
 									<a href="<?= base_url('Laporan/edit/' . $detail['id_pengaduan']) ?>" class="btn btn-success btn-sm">Edit</a>
 									<a href="<?= base_url('Laporan/hapus/' . $detail['id_pengaduan']) ?>" class="btn btn-danger btn-sm">Hapus</a>
 								<?php endif; ?>

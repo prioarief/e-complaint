@@ -11,7 +11,7 @@
 						<div class=" row no-gutters">
 							<div class="col-md-4">
 								<a href="<?= base_url('assets/img/lampiran/' . $report['foto']) ?>">
-									<img src="<?= base_url('assets/img/lampiran/' . $report['foto']) ?>" class="card-img mt-5 ml-4">
+									<img src="<?= base_url('assets/img/lampiran/' . $report['foto']) ?>" class="card-img mt-5 ml-2">
 								</a>
 							</div>
 							<div class="col-md-8">

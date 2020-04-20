@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="<?= base_url() ?>assets/myCss/style.css">
 	<script src="<?= base_url() ?>assets/bootstrap/js/jquery-3.4.1.slim.min.js"></script>
 	<script src="<?= base_url() ?>assets/bootstrap/js/bootstrap.min.js"></script>
-	<script src="<?= base_url() ?>assets/bootstrap/js/popper.js"></script>
+	<script src="<?= base_url() ?>assets/myJs/script.js"></script>
 </head>
 
 <body>
@@ -25,10 +25,10 @@
 
 		<a class="navbar-link text-white text-decoration-none" href="#">Login Admin</a>
 	</nav> -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-fixed-top">
 		<a class="navbar-brand" href="<?= base_url() ?>Home">
 			<img src="<?= base_url() ?>assets/img/tangerang.png" width="30" height="30" class="d-inline-block align-top" alt="">
-			E-Complaint Tangerang
+			E-Complaint
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -54,8 +54,7 @@
 		</div>
 	</nav>
 
-	<div class="jumbotron jumbotron-fluid" style="background-image: url('<?= base_url() ?>assets/img/puspem.jpg'); background-size : 100% 100%">
-		<!-- <img class="img img-fluid landing-page" src="<?= base_url() ?>assets/img/puspem.jpg" alt=""> -->
+	<!-- <div class="jumbotron jumbotron-fluid" style="background-image: url('<?= base_url() ?>assets/img/puspem.jpg'); background-size : 100% 100%">
 		<div class="container">
 			<br>
 			<h4 class="ml-5 header">Selamat Datang di <br> Website Pengaduan Laporan Masyarakat <br> Kota Tangerang</h4>
@@ -76,21 +75,33 @@
 				<a href="<?= base_url() ?>Laporan" class="btn btn-info ml-1 mt-2 mb-5 btn-sm">Laporan Saya</a>
 			<?php endif; ?>
 		</div>
-	</div>
+	</div> -->
 
-	<!-- <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+	<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img src="<?= base_url() ?>assets/img/puspem.jpg" class="d-block w-100" alt="<?= base_url() ?>assets/img/puspem.jpg">
+				<img src="<?= base_url() ?>assets/img/banner.png" class="d-block w-100 h-98 p-absolute gambar" alt="<?= base_url() ?>assets/img/banner.png">
 			</div>
 			<div class="carousel-item">
-				<img src="<?= base_url() ?>assets/img/puspem.jpg" class="d-block w-100" alt="<?= base_url() ?>assets/img/puspem2.jpg">
+				<img src="<?= base_url() ?>assets/img/banner1.png" class="d-block w-100 h-98 p-absolute gambar" alt="<?= base_url() ?>assets/img/banner1.png">
 			</div>
 			<div class="carousel-item">
-				<img src="<?= base_url() ?>assets/img/puspem.jpg" class="d-block w-100" alt="<?= base_url() ?>assets/img/puspem.jpg">
+				<img src="<?= base_url() ?>assets/img/banner2.png" class="d-block w-100 h-98 p-absolute gambar" alt="<?= base_url() ?>assets/img/banner2.png">
 			</div>
 		</div>
-	</div> -->
+	</div>
+
+	<?php if (!$this->session->userdata('nik')) : ?>
+		<div class="text-center">
+			<h6 class="text-center font-weight-bold">Silakan login untuk membuat laporan</h6>
+			<a href="<?= base_url() ?>Auth" class="badge badge-info m-auto mt-2 mb-5 w-200">Login</a>
+		</div>
+	<?php else : ?>
+		<div class="text-center">
+			<h6 class="text-center font-weight-bold">Silakan membuat laporan</h6>
+			<a href="<?= base_url() ?>Laporan/Create" class="badge badge-info m-auto mt-2 mb-5 w-200">Buat Laporan</a>
+		</div>
+	<?php endif; ?>
 
 
 

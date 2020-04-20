@@ -5,10 +5,8 @@
 	display: block;
 } */
 
-.header {
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-	text-shadow: 2.5px 1px #f8f4f4;
-	font-weight: bold;
+.gambar{
+	min-height: 250px !important;
 }
 
 .deskripsi {

@@ -14,7 +14,7 @@ class LaporanModel extends CI_Model
 
 	public function GetSpesificLaporan($limit, $start)
 	{
-		return $this->db->get_where('laporan', ['status' => 'proses' and 'selesai'], $limit, $start)->result_array();
+		return $this->db->get_where('laporan', ['status !=' => 'menunggu verifikasi'], $limit, $start)->result_array();
 	}
 
 	public function CountMyLaporan()
@@ -24,7 +24,7 @@ class LaporanModel extends CI_Model
 
 	public function CountLaporanProses()
 	{
-		return $this->db->get_where('laporan', ['status' => 'proses'])->num_rows();
+		return $this->db->get_where('laporan', ['status !=' => 'menunggu verifikasi'])->num_rows();
 	}
 
 	public function DetailLaporan($id)
